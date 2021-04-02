@@ -1,0 +1,5 @@
+<launch>
+	<node pkg="inrol_iq" type="switch_listener" name="inrol" output="screen">
+		<rosparam param="gpios">[26,13,6]</rosparam>
+	</node>
+</launch>

@@ -1,0 +1,20 @@
+<launch>
+	<env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${node}]: ${message}"/>
+	<group ns="inrol">
+		<node pkg="inrol_iq" type="switch_listener" name="switch_listener" output="screen">
+			<rosparam param="gpios">[26,13,6]</rosparam>
+		</node>
+
+		<node pkg="inrol_iq" type="iq_controller" name="iq_controller" output="screen">
+			<rosparam file="$(find inrol_iq)/config/iq.yaml" command="load"/>
+		</node>
+		
+		<node pkg="inrol_iq" type="joy_controller" name="joy_controller" output="screen">
+			<rosparam param="joy_topic">"joy"</rosparam>
+			<rosparam param="switch_topic">"switch"</rosparam>
+			<rosparam param="input_topic">"iq/input"</rosparam>
+		</node>
+		
+		<node pkg="joy" type="joy_node" name="joy_node" output="screen" />
+	</group>
+</launch>
